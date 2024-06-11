@@ -18,3 +18,29 @@ a {
   box-sizing: border-box;
   position: relative
 }
+
+:root{
+  --primary-700: #8C4949;
+  --primary-600: #A85A5A;
+  --primary-500: #BE7575;
+  --primary-400: #CA8787;
+  --primary-300: #E3BEBE;
+  --primary-200: #EFD9D9;
+  --primary-100: #F6EAEA;
+  --primary-50: #FBF5F5;
+  --secondary-700: #8B4A4B;
+  --secondary-600: #A75B5C;
+  --secondary-500: #BD7677;
+  --secondary-400: #CA8A8B;
+  --secondary-300: #E3BEBF;
+  --secondary-200: #EFD9D9;
+  --secondary-100: #F6EAEA;
+  --secondary-50: #FAF6F6;
+  --neutral: #fff;
+  --default: #1f1f1f;
+  --default-inverse: #e3e3e3;
+  --secondary: #3b3b3b;
+  --secondary-inverse: #c7c7c7;
+  --tertiary: #575757;
+  --tertiary-inverse: #8f8f8f;
+}
