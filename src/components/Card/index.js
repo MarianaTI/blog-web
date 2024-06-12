@@ -20,7 +20,7 @@ const Card = ({ image, title, alt, date, user }) => {
       </Top>
       <Info>
         <span>{date}</span>
-        <span>{user}</span>
+        <span>By {user}</span>
       </Info>
     </CardStyled>
   );
