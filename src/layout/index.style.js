@@ -3,11 +3,11 @@ import styled from "@emotion/styled";
 export const NavbarContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-bottom: 16px;
+  margin-bottom: ${(props) => (props.noNavbar ? "16px" : "0")};
 `;
 
 export const ChildrenContainer = styled.div`
-  margin: 0 100px;
+  margin: ${(props) => (props.noNavbar ? "0 100px" : "0")};
 `;
 
 export const Footer = styled.div`

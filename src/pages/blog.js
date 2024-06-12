@@ -2,15 +2,26 @@ import Card from "@/components/Card";
 import { Content, Header, Section } from "@/styles/Blog.style";
 import React from "react";
 import { blog } from "../../constants";
+import { useRouter } from "next/router";
 
 export default function Blog() {
+  const router = useRouter();
+
+  const navigateToBlog = (slug) => {
+    return router.push({
+      pathname: "/[blogSlug]",
+      query: { blogSlug: slug },
+    })
+  }
   return (
     <div>
       <Header>
         <Content>
           <h1>Blogs.</h1>
           <span>
-          Sumérgete en nuestro blog y explora una colección de artículos diseñados para inspirarte, informarte y entretenerte. Aquí encontrarás las últimas tendencias, historias y consejos útiles. 
+            Sumérgete en nuestro blog y explora una colección de artículos
+            diseñados para inspirarte, informarte y entretenerte. Aquí
+            encontrarás las últimas tendencias, historias y consejos útiles.
           </span>
         </Content>
       </Header>
@@ -23,6 +34,7 @@ export default function Blog() {
             title={blog.title}
             date={blog.date}
             user={blog.user}
+            onClick={() => navigateToBlog(blog.slug)}
           />
         ))}
       </Section>

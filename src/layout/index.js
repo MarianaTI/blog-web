@@ -6,12 +6,11 @@ import { ChildrenContainer, Footer, NavbarContainer } from "./index.style";
 export default function Layout({ children }) {
   const router = useRouter();
 
-  const noNavbar = !router.pathname.match(/login/g);
+  const noNavbar = !router.pathname.match(/login|register/g);
   return (
     <div>
-      <NavbarContainer>{noNavbar && <Navbar />}</NavbarContainer>
-      <ChildrenContainer>{children}</ChildrenContainer>
-      <Footer/>
+      <NavbarContainer noNavbar={noNavbar}>{noNavbar && <Navbar />}</NavbarContainer>
+      <ChildrenContainer noNavbar={noNavbar}>{children}</ChildrenContainer>
     </div>
   );
 }

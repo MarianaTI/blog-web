@@ -2,9 +2,9 @@ import Image from "next/image";
 import React from "react";
 import { CardStyled, Info, Top } from "./index.style";
 
-const Card = ({ image, title, alt, date, user }) => {
+const Card = ({ image, title, alt, date, user, onClick }) => {
   return (
-    <CardStyled>
+    <CardStyled onClick={onClick}>
       <Top>
         <Image
           src={image}

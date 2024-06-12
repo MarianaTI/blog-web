@@ -16,6 +16,7 @@ export const Content = styled.div`
   border-radius: 25px;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 50px 0 rgba(0, 0, 0, 0.05);
 `;
 
 export const FormContainer = styled.div`
