@@ -45,7 +45,7 @@ export default function Login() {
           </Form>
           <div>
             <span>
-              No tienes cuenta? <a className="register">Regístrate</a>
+              No tienes cuenta? <a href="/register" className="register">Regístrate</a>
             </span>
           </div>
         </FormContainer>
