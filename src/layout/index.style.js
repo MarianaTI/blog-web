@@ -9,3 +9,8 @@ export const NavbarContainer = styled.div`
 export const ChildrenContainer = styled.div`
   margin: 0 100px;
 `;
+
+export const Footer = styled.div`
+  height: 200px;
+  background: var(--primary-100);
+`;

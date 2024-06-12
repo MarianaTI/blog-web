@@ -1,7 +1,7 @@
 import Navbar from "@/components/Navbar";
 import { useRouter } from "next/router";
 import React from "react";
-import { ChildrenContainer, NavbarContainer } from "./index.style";
+import { ChildrenContainer, Footer, NavbarContainer } from "./index.style";
 
 export default function Layout({ children }) {
   const router = useRouter();
@@ -11,6 +11,7 @@ export default function Layout({ children }) {
     <div>
       <NavbarContainer>{noNavbar && <Navbar />}</NavbarContainer>
       <ChildrenContainer>{children}</ChildrenContainer>
+      <Footer/>
     </div>
   );
 }
