@@ -51,6 +51,8 @@ export default function Register() {
           <Image
             src="/img/register.jpg"
             fill={true}
+             loading="lazy"
+            alt="register"
             style={{
               borderRadius: "50px",
               padding: "24px",

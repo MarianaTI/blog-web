@@ -53,6 +53,8 @@ export default function Login() {
           <Image
             src="/img/login.jpg"
             fill={true}
+            loading="lazy"
+            alt="login"
             style={{
               borderRadius: "50px",
               padding: "24px",
