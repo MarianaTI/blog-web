@@ -16,6 +16,7 @@ const Input = ({ label, icon, error, control, name, fullWidth }) => {
       <Label>{label}</Label>
       <InputWrapper>
         <InputStyled
+        {...field}
           fullWidth={fullWidth}
         />
         {icon && <IconWrapper>{icon}</IconWrapper>}

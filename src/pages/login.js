@@ -1,5 +1,8 @@
+import SignInUserUseCase from "@/application/usecases/userUseCase/SignInUserCase";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
+import User from "@/domain/entities/user";
+import UserRepo from "@/infraestructure/implementation/httpRequest/axios/UserRepo";
 import {
   Container,
   Content,
@@ -7,11 +10,15 @@ import {
   FormContainer,
   ImageContainer,
 } from "@/styles/Login.style";
+import Cookies from "js-cookie";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React from "react";
 import { useForm } from "react-hook-form";
+import CryptoJS from "crypto-js";
 
 export default function Login() {
+  const route = useRouter();
   const {
     control,
     handleSubmit,
@@ -22,6 +29,27 @@ export default function Login() {
       password: "",
     },
   });
+
+  const onSubmit = async (data) => {
+    try {
+      const user = new User(null, null, data.email, data.password);
+      const userRepo = new UserRepo();
+      const signInUseCase = new SignInUserUseCase(userRepo);
+      const signInResponse = await signInUseCase.run(user);
+
+      if (signInResponse && signInResponse.token) {
+        const encryptedToken = CryptoJS.AES.encrypt(
+          signInResponse.token,
+          "cookie-encrypted"
+        ).toString();
+        Cookies.set("userToken", encryptedToken, { expires: 1 / 24 });
+        route.push("/blog");
+      }
+    } catch (error) {
+      console.log("Error: ", error);
+    }
+  };
+
   return (
     <Container>
       <Content>
@@ -33,7 +61,7 @@ export default function Login() {
               cuidado de tu piel y mantenerla radiante.
             </span>
           </div>
-          <Form>
+          <Form onSubmit={handleSubmit(onSubmit)}>
             <Input fullWidth control={control} name="email" label="Email" />
             <Input
               fullWidth
@@ -41,11 +69,14 @@ export default function Login() {
               name="password"
               label="Password"
             />
-            <Button fullWidth text="Iniciar sesión" />
+            <Button fullWidth text="Iniciar sesión" type="submit"/>
           </Form>
           <div>
             <span>
-              No tienes cuenta? <a href="/register" className="register">Regístrate</a>
+              No tienes cuenta?{" "}
+              <a href="/register" className="register">
+                Regístrate
+              </a>
             </span>
           </div>
         </FormContainer>
