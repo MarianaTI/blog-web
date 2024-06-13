@@ -51,7 +51,7 @@ export const AutorInfo = styled.div`
 `;
 
 export const BlogInfoContent = styled.div`
-  padding-top: 24px;
+  padding: 32px 0;
   p {
     color: var(--default);
     font-family: "Poppins", sans-serif;
@@ -63,5 +63,37 @@ export const BlogInfoContent = styled.div`
 `;
 
 export const Comments = styled.section`
-    background-color: aliceblue;
+  padding: 40px 0;
+  h5 {
+    font-family: "Poppins", sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--default);
+    margin: 24px 8px;
+  }
+`;
+
+export const FormStyled = styled.form`
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+`;
+
+export const TextAreaStyled = styled.textarea`
+  width: 100%;
+  height: 120px;
+  padding: 16px;
+  box-sizing: border-box;
+  border: 1px solid var(--secondary-inverse);
+  border-radius: 10px;
+  background: var(--neutral);
+  resize: none;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--default);
+  caret-color: var(--secondary-500);
+  :focus {
+    outline: none !important;
+  }
 `;

@@ -1,7 +1,16 @@
 import { useRouter } from "next/router";
 import React from "react";
 import { blog } from "../../constants";
-import { AutorInfo, BlogInfoContent, Comments, Container, Grid, Info } from "@/styles/BlogSlug.style";
+import {
+  AutorInfo,
+  BlogInfoContent,
+  Comments,
+  Container,
+  FormStyled,
+  Grid,
+  Info,
+  TextAreaStyled,
+} from "@/styles/BlogSlug.style";
 import Image from "next/image";
 import Button from "@/components/Button";
 
@@ -44,11 +53,11 @@ export default function BlogSlug() {
         <p>{blogs.content}</p>
       </BlogInfoContent>
       <Comments>
-          <h5>Comentarios</h5>
-          <form>
-            <textarea></textarea>
-            <Button text="Enviar"/>
-          </form>
+        <h5>Comentarios</h5>
+        <FormStyled>
+          <TextAreaStyled placeholder="Escribe algún comentario..."/>
+          <Button text="Enviar" />
+        </FormStyled>
       </Comments>
     </Container>
   );
