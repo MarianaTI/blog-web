@@ -1,8 +1,8 @@
 import React from "react";
 import { useController } from "react-hook-form";
-import { InputStyled, InputWrapper, Label } from "./index.style";
+import { IconWrapper, InputStyled, InputWrapper, Label } from "./index.style";
 
-const Input = ({ label, icon, error, control, name, fullWidth }) => {
+const Input = ({ label, icon, error, control, name, fullWidth, type }) => {
   const {
     field,
     fieldState: { invalid, isTouched, isDirty },
@@ -15,10 +15,7 @@ const Input = ({ label, icon, error, control, name, fullWidth }) => {
     <>
       <Label>{label}</Label>
       <InputWrapper>
-        <InputStyled
-        {...field}
-          fullWidth={fullWidth}
-        />
+        <InputStyled {...field} fullWidth={fullWidth} type={type}/>
         {icon && <IconWrapper>{icon}</IconWrapper>}
       </InputWrapper>
     </>

@@ -13,12 +13,14 @@ import {
 import Cookies from "js-cookie";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import CryptoJS from "crypto-js";
+import { IoEyeSharp, IoEyeOffSharp } from "react-icons/io5";
 
 export default function Login() {
   const route = useRouter();
+  const [isShowPassword, setShowPassword] = useState(false);
   const {
     control,
     handleSubmit,
@@ -29,6 +31,10 @@ export default function Login() {
       password: "",
     },
   });
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!isShowPassword);
+  };
 
   const onSubmit = async (data) => {
     try {
@@ -68,8 +74,16 @@ export default function Login() {
               control={control}
               name="password"
               label="Password"
+              type={isShowPassword ? "text" : "password"}
+              icon={
+                isShowPassword ? (
+                  <IoEyeOffSharp onClick={togglePasswordVisibility} />
+                ) : (
+                  <IoEyeSharp onClick={togglePasswordVisibility} />
+                )
+              }
             />
-            <Button fullWidth text="Iniciar sesión" type="submit"/>
+            <Button fullWidth text="Iniciar sesión" type="submit" />
           </Form>
           <div>
             <span>

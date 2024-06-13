@@ -38,9 +38,10 @@ export const InputStyled = styled.input`
 
 export const IconWrapper = styled.div`
   position: absolute;
-  right: 10px;
-  top: 47%;
-  transform: translateY(-50%);
-  font-size: 24px;
+  right: 15px;
+  top: 55%;
+  transform: translateY(-48%);
+  font-size: 20px;
   cursor: pointer;
+  color: var(--tertiary-inverse);
 `;
