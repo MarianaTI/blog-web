@@ -31,4 +31,7 @@ export const Section = styled.section`
   padding-left: 3%;
   margin-bottom: 10%;
   grid-gap: 80px;
+  @media(max-width: 1600px){
+    grid-template-columns: repeat(4, 1fr);
+  }
 `;

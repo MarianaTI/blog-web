@@ -36,7 +36,7 @@ export default function Register() {
               name="password"
               label="Password"
             />
-            <Button text="Regístrarse" />
+            <Button fullWidth text="Regístrarse" />
           </Form>
           <div>
             <span>

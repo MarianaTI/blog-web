@@ -41,7 +41,7 @@ export default function Login() {
               name="password"
               label="Password"
             />
-            <Button text="Iniciar sesión" />
+            <Button fullWidth text="Iniciar sesión" />
           </Form>
           <div>
             <span>
