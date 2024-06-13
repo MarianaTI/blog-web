@@ -1,4 +1,4 @@
-import SignInUserUseCase from "@/application/usecases/userUseCase/SignInUserCase";
+import SignInUserUseCase from "@/application/usecases/userUseCase/SignInUserUseCase";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import User from "@/domain/entities/user";
@@ -83,7 +83,9 @@ export default function Login() {
         <ImageContainer>
           <Image
             src="/img/login.jpg"
-            fill={true}
+            fill
+            sizes="100vw, 100vh"
+            priority={false}
             loading="lazy"
             alt="login"
             style={{

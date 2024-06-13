@@ -1,11 +1,16 @@
+import SignUpUserUseCase from "@/application/usecases/userUseCase/SignUpUserUseCase";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
+import User from "@/domain/entities/user";
+import UserRepo from "@/infraestructure/implementation/httpRequest/axios/UserRepo";
 import { Container, Content, Form, FormContainer, ImageContainer } from "@/styles/Register.style";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React from "react";
 import { useForm } from "react-hook-form";
 
 export default function Register() {
+  const route = useRouter();
   const {
     control,
     handleSubmit,
@@ -17,6 +22,21 @@ export default function Register() {
       password: "",
     },
   });
+
+  const onSubmit = async (data) => {
+    const user = new User(null, data.username, data.email, data.password);
+    const userRepo = new UserRepo();
+    const signUpUserUseCase = new SignUpUserUseCase(userRepo);
+
+    try {
+      const registeredUser = await signUpUserUseCase.run(user);
+      console.log("Usuario creado: ", registeredUser);
+      route.push("/login");
+    } catch (error) {
+      console.error("Error creando usuario:", error);
+    }
+  }
+
   return (
     <Container>
       <Content>
@@ -27,7 +47,7 @@ export default function Register() {
             Regístrate para acceder a consejos exclusivos y todo lo que necesitas para una piel radiante.
             </span>
           </div>
-          <Form>
+          <Form onSubmit={handleSubmit(onSubmit)}>
             <Input fullWidth control={control} name="username" label="Username" />
             <Input fullWidth control={control} name="email" label="Email" />
             <Input
@@ -36,7 +56,7 @@ export default function Register() {
               name="password"
               label="Password"
             />
-            <Button fullWidth text="Regístrarse" />
+            <Button fullWidth text="Regístrarse" type="submit"/>
           </Form>
           <div>
             <span>
@@ -50,7 +70,8 @@ export default function Register() {
         <ImageContainer>
           <Image
             src="/img/register.jpg"
-            fill={true}
+            fill
+            sizes="100vw, 100vh"
              loading="lazy"
             alt="register"
             style={{
