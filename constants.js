@@ -93,4 +93,10 @@ export const comments = [
     date: "11 junio, 2024",
     hour: "8:28 am"
   },
+  {
+    user: "Rodrigo Caraveo",
+    comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  tempor incididunt ut labore et dolore magna aliqua. Sed egestas egestas  fringilla phasellus faucibus scelerisque.",
+    date: "11 junio, 2024",
+    hour: "8:28 am"
+  },
 ]

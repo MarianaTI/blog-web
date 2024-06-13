@@ -1,17 +1,18 @@
 import React from "react";
+import { Container, Content, Info } from "./index.style";
 
 const Comment = ({ user, comment, date, hour }) => {
   return (
-    <div>
-      <div>
+    <Container>
+      <Content>
         <h1>{user}</h1>
         <p>{comment}</p>
-      </div>
-      <div>
+      </Content>
+      <Info>
         <span>{date}</span>
         <span>{hour}</span>
-      </div>
-    </div>
+      </Info>
+    </Container>
   );
 };
 

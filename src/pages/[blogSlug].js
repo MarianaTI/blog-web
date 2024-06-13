@@ -4,6 +4,7 @@ import { blog, comments } from "../../constants";
 import {
   AutorInfo,
   BlogInfoContent,
+  CommentContainer,
   Comments,
   Container,
   FormStyled,
@@ -41,6 +42,7 @@ export default function BlogSlug() {
         <div>
           <Image
             src={blogs.image}
+            alt={blogs.slug}
             fill={true}
             loading="lazy"
             style={{
@@ -59,7 +61,7 @@ export default function BlogSlug() {
           <TextAreaStyled placeholder="Escribe algún comentario..." />
           <Button text="Enviar" />
         </FormStyled>
-        <div>
+        <CommentContainer>
           {comments.map((comment, index) => (
             <Comment
               key={index}
@@ -69,7 +71,7 @@ export default function BlogSlug() {
               hour={comment.hour}
             />
           ))}
-        </div>
+        </CommentContainer>
       </Comments>
     </Container>
   );

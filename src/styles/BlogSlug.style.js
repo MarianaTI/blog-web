@@ -40,7 +40,7 @@ export const AutorInfo = styled.div`
   font-family: "Poppins", sans-serif;
   font-size: 12px;
   gap: 8px;
-  & span:first-child {
+  & span:first-of-type {
     color: var(--default);
     font-weight: 600;
   }
@@ -96,4 +96,11 @@ export const TextAreaStyled = styled.textarea`
   :focus {
     outline: none !important;
   }
+`;
+
+export const CommentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-top: 40px;
 `;
