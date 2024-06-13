@@ -85,3 +85,12 @@ export const blog = [
       "Lorem  ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Aliquet enim tortor  at auctor urna nunc id cursus metus. Eget egestas purus viverra accumsan  in nisl nisi scelerisque eu. Pellentesque massa placerat duis ultricies  lacus. Vel turpis nunc eget lorem dolor sed. \n \n Lorem  ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  tempor incididunt ut labore et dolore magna aliqua. Consectetur libero  id faucibus nisl tincidunt eget nullam. Sit amet venenatis urna cursus.  Egestas fringilla phasellus faucibus scelerisque eleifend donec. Mi quis  hendrerit dolor magna eget est lorem ipsum. Nunc sed velit dignissim  sodales ut eu sem. Purus ut faucibus pulvinar elementum. Posuere lorem  ipsum dolor sit amet consectetur adipiscing elit. Semper quis lectus  nulla at volutpat diam ut. Sed cras ornare arcu dui vivamus arcu felis  bibendum ut. \n \n Lorem  ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  tempor incididunt ut labore et dolore magna aliqua. At consectetur lorem  donec massa sapien faucibus et. Pretium fusce id velit ut tortor. Vel  quam elementum pulvinar etiam non quam lacus suspendisse. Duis convallis  convallis tellus id interdum. Mauris ultrices eros in cursus turpis  massa tincidunt dui ut. Bibendum at varius vel pharetra. At ultrices mi  tempus imperdiet nulla.",
   },
 ];
+
+export const comments = [
+  {
+    user: "Rodrigo Caraveo",
+    comment: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod  tempor incididunt ut labore et dolore magna aliqua. Sed egestas egestas  fringilla phasellus faucibus scelerisque.",
+    date: "11 junio, 2024",
+    hour: "8:28 am"
+  },
+]

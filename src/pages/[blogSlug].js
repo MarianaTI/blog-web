@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React from "react";
-import { blog } from "../../constants";
+import { blog, comments } from "../../constants";
 import {
   AutorInfo,
   BlogInfoContent,
@@ -13,6 +13,7 @@ import {
 } from "@/styles/BlogSlug.style";
 import Image from "next/image";
 import Button from "@/components/Button";
+import Comment from "@/components/Comment";
 
 export default function BlogSlug() {
   const router = useRouter();
@@ -55,9 +56,20 @@ export default function BlogSlug() {
       <Comments>
         <h5>Comentarios</h5>
         <FormStyled>
-          <TextAreaStyled placeholder="Escribe algún comentario..."/>
+          <TextAreaStyled placeholder="Escribe algún comentario..." />
           <Button text="Enviar" />
         </FormStyled>
+        <div>
+          {comments.map((comment, index) => (
+            <Comment
+              key={index}
+              user={comment.user}
+              comment={comment.comment}
+              date={comment.date}
+              hour={comment.hour}
+            />
+          ))}
+        </div>
       </Comments>
     </Container>
   );
