@@ -23,7 +23,7 @@ export const FormContainer = styled.div`
   padding: 32px 40px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
   h1 {
     font-family: "Poppins", sans-serif;
     font-weight: 600;

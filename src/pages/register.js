@@ -16,6 +16,14 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoEyeSharp, IoEyeOffSharp } from "react-icons/io5";
 import { toast } from "react-toastify";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+const schema = yup.object().shape({
+  username: yup.string().required("El nombre de usuario es obligatorio"),
+  email: yup.string().email("Email no válido").required("El email es obligatorio"),
+  password: yup.string().min(6, "La contraseña debe tener al menos 6 caracteres").required("La contraseña es obligatoria"),
+});
 
 export default function Register() {
   const route = useRouter();
@@ -25,6 +33,7 @@ export default function Register() {
     handleSubmit,
     formState: { errors, isDirty },
   } = useForm({
+    resolver: yupResolver(schema),
     defaultValues: {
       username: "",
       email: "",
@@ -69,13 +78,15 @@ export default function Register() {
               control={control}
               name="username"
               label="Username"
+              error={errors.username?.message}
             />
-            <Input fullWidth control={control} name="email" label="Email" />
+            <Input fullWidth control={control} name="email" label="Email" error={errors.email?.message}/>
             <Input
               fullWidth
               control={control}
               name="password"
               label="Password"
+              error={errors.password?.message}
               type={isShowPassword ? "text" : "password"}
               icon={
                 isShowPassword ? (
@@ -100,7 +111,6 @@ export default function Register() {
           <Image
             src="/img/register.jpg"
             fill
-            sizes="100vw, 100vh"
             loading="lazy"
             alt="register"
             style={{

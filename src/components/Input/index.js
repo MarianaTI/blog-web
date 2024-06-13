@@ -1,6 +1,6 @@
 import React from "react";
 import { useController } from "react-hook-form";
-import { IconWrapper, InputStyled, InputWrapper, Label } from "./index.style";
+import { ErrorMessage, IconWrapper, InputStyled, InputWrapper, Label } from "./index.style";
 
 const Input = ({ label, icon, error, control, name, fullWidth, type }) => {
   const {
@@ -18,6 +18,7 @@ const Input = ({ label, icon, error, control, name, fullWidth, type }) => {
         <InputStyled {...field} fullWidth={fullWidth} type={type}/>
         {icon && <IconWrapper>{icon}</IconWrapper>}
       </InputWrapper>
+      {error && <ErrorMessage>{error}</ErrorMessage>}
     </>
   );
 };

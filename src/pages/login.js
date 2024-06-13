@@ -18,6 +18,19 @@ import { useForm } from "react-hook-form";
 import CryptoJS from "crypto-js";
 import { IoEyeSharp, IoEyeOffSharp } from "react-icons/io5";
 import { toast } from "react-toastify";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+const schema = yup.object().shape({
+  email: yup
+    .string()
+    .email("Email no válido")
+    .required("El email es obligatorio"),
+  password: yup
+    .string()
+    //.min(6, "La contraseña debe tener al menos 6 caracteres")
+    .required("La contraseña es obligatoria"),
+});
 
 export default function Login() {
   const route = useRouter();
@@ -27,6 +40,7 @@ export default function Login() {
     handleSubmit,
     formState: { errors, isDirty },
   } = useForm({
+    resolver: yupResolver(schema),
     defaultValues: {
       email: "",
       password: "",
@@ -71,12 +85,19 @@ export default function Login() {
             </span>
           </div>
           <Form onSubmit={handleSubmit(onSubmit)}>
-            <Input fullWidth control={control} name="email" label="Email" />
+            <Input
+              fullWidth
+              control={control}
+              name="email"
+              label="Email"
+              error={errors.email?.message}
+            />
             <Input
               fullWidth
               control={control}
               name="password"
               label="Password"
+              error={errors.password?.message}
               type={isShowPassword ? "text" : "password"}
               icon={
                 isShowPassword ? (

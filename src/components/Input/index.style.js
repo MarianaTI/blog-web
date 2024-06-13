@@ -45,3 +45,10 @@ export const IconWrapper = styled.div`
   cursor: pointer;
   color: var(--tertiary-inverse);
 `;
+
+export const ErrorMessage = styled.p`
+  color: red;
+  font-size: 10px;
+  font-weight: 400;
+  margin: 0 16px;
+`;

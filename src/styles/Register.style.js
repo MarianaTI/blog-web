@@ -11,11 +11,13 @@ export const Container = styled.div`
 
 export const Content = styled.div`
   width: 800px;
-  height: 500px;
+  height: 530px;
   background-color: var(--neutral);
   border-radius: 25px;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  align-items: center;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 50px 0 rgba(0, 0, 0, 0.05);
 `;
 
@@ -23,7 +25,7 @@ export const FormContainer = styled.div`
   padding: 32px 40px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
   h1 {
     font-family: "Poppins", sans-serif;
     font-weight: 600;
@@ -55,4 +57,5 @@ export const ImageContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%;
 `;
