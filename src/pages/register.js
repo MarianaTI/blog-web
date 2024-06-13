@@ -15,6 +15,7 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { IoEyeSharp, IoEyeOffSharp } from "react-icons/io5";
+import { toast } from "react-toastify";
 
 export default function Register() {
   const route = useRouter();
@@ -43,9 +44,11 @@ export default function Register() {
     try {
       const registeredUser = await signUpUserUseCase.run(user);
       console.log("Usuario creado: ", registeredUser);
+      toast.success("Registro exitoso!");
       route.push("/login");
     } catch (error) {
       console.error("Error creando usuario:", error);
+      toast.error("Error al registrarse :(");
     }
   };
 

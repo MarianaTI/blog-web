@@ -17,6 +17,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import CryptoJS from "crypto-js";
 import { IoEyeSharp, IoEyeOffSharp } from "react-icons/io5";
+import { toast } from "react-toastify";
 
 export default function Login() {
   const route = useRouter();
@@ -49,10 +50,12 @@ export default function Login() {
           "cookie-encrypted"
         ).toString();
         Cookies.set("userToken", encryptedToken, { expires: 1 / 24 });
+        toast.success("Inicio de sesión exitoso!");
         route.push("/blog");
       }
     } catch (error) {
       console.log("Error: ", error);
+      toast.error("Error al iniciar sesión :(");
     }
   };
 
