@@ -20,6 +20,7 @@ import { useSelector } from "react-redux";
 
 export default function Crud() {
   const user = useSelector((state) => state.user.username);
+  const userId = useSelector((state) => state.user._id);
   const [blogs, setBlogs] = useState([]);
   const [open, setOpen] = useState(false);
   const fileInputRef = useRef(null);
@@ -40,6 +41,24 @@ export default function Crud() {
 
   const blogRepo = new BlogRepo();
   const getAllBlogUseCase = new GetAllBlogUseCase(blogRepo);
+
+  const onSubmit = async (data) => {
+    const file = fileInputRef.current.files[0];
+    const blogData = {
+      ...data,
+      image: file,
+      id_user: userId
+    };
+
+    try {
+      const response = await blogRepo.create(blogData);
+      console.log("Blog creado:", response);
+      fetchBlogs();
+      handleClose();
+    } catch (error) {
+      console.error("Error al crear el blog:", error);
+    }
+  };
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -92,7 +111,7 @@ export default function Crud() {
         title="Agregar blog"
         message="Por favor, complete la información a continuación para agregar un nuevo blog."
       >
-        <FormStyled>
+        <FormStyled onSubmit={handleSubmit(onSubmit)}>
           <Input fullWidth control={control} name="title" label="Título" />
           <Input
             fullWidth
@@ -114,9 +133,8 @@ export default function Crud() {
               if (file) {
                 const reader = new FileReader();
                 reader.onloadend = function () {
-                  // Aquí `reader.result` contiene la representación base64 de la imagen
                   console.log("Imagen en base64:", reader.result);
-                  setImageUrl(reader.result); // Ahora `imageUrl` almacenará la cadena base64 de la imagen
+                  setImageUrl(reader.result); 
                 };
                 reader.readAsDataURL(file);
               }
@@ -124,7 +142,7 @@ export default function Crud() {
             ref={fileInputRef}
           />
           <div>
-            <Button text="Aceptar" />
+            <Button text="Aceptar" type="submit"/>
           </div>
         </FormStyled>
       </ModalComponent>

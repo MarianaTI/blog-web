@@ -2,10 +2,12 @@ import axios from "axios";
 import IBlogRepo from "@/domain/repositories/IBlogRepo";
 
 class BlogRepo extends IBlogRepo {
-  constructor() {
+  constructor(id_user) {
     super();
+    this.id_user = id_user;
     this.url = "http://localhost:3000/api/blogs";
     this.urlId = "http://localhost:3000/api/blogs/";
+    this.urlPost = "http://localhost:3000/api/create/blog";
   }
 
   async getAll() {
@@ -24,6 +26,27 @@ class BlogRepo extends IBlogRepo {
       return response.data;
     } catch (error) {
       console.error("Error fetching los blogs:", error.message);
+      throw error;
+    }
+  }
+
+  async create(blog) {
+    try {
+      const formData = new FormData();
+      formData.append("id_user", blog.id_user);
+      formData.append("title", blog.title);
+      formData.append("description", blog.description);
+      formData.append("content", blog.content);
+      formData.append("image", blog.image);
+      const response = await axios.post(this.urlPost, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          id_user: this.id_user,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Error al crear el blog:", error);
       throw error;
     }
   }
