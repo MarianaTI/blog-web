@@ -11,8 +11,8 @@ export default function Blog() {
 
   const navigateToBlog = (id) => {
     return router.push({
-      pathname: "/[blogSlug]",
-      query: { blogSlug: id },
+      pathname: "/[blogId]",
+      query: { blogId: id },
     });
   };
 
@@ -31,11 +31,11 @@ export default function Blog() {
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = date.getDate();
-    const month = date.toLocaleDateString('es-ES', { month: 'long' });
+    const month = date.toLocaleDateString("es-ES", { month: "long" });
     const year = date.getFullYear();
     return `${day} ${month}, ${year}`;
   };
-  
+
   useEffect(() => {
     fetchBlogs();
   }, []);

@@ -16,6 +16,7 @@ export const Info = styled.aside`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 400px;
   h1 {
     margin: 0;
     margin-bottom: 16px;
@@ -31,6 +32,17 @@ export const Info = styled.aside`
     font-weight: 400;
     color: var(--tertiary);
     width: 600px;
+  }
+`;
+
+export const ImageContainer = styled.div`
+  width: 100%;
+  height: 400px;
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 20px;
   }
 `;
 
@@ -74,9 +86,9 @@ export const Comments = styled.section`
 `;
 
 export const FormStyled = styled.form`
-    display: flex;
-    flex-direction: column;
-    align-items: end;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
 `;
 
 export const TextAreaStyled = styled.textarea`
