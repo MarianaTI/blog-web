@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+
 export const Container = styled.div`
   position: relative;
   @media (max-width: 740px) {
@@ -10,7 +11,7 @@ export const DropdownContainer = styled.div`
   position: absolute;
   top: 100%;
   right: 0;
-  width: 200px;
+  width: 150px;
   background-color: #ffffff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
@@ -43,27 +44,20 @@ export const DropdownContainer = styled.div`
 export const Option = styled.div`
   display: flex;
   align-items: center;
-  padding: 12px 16px;
+  padding: 8px 16px;
   font-size: 14px;
-  color: #888;
+  color: var(--tertiary);
   cursor: pointer;
   transition: color 0.3s ease;
   &:hover {
-    color: #f27d16;
+    color: var(--primary-500);
+    background: var(--primary-100);
   }
   &:not(:last-child) {
     border-bottom: 1px solid #f0f0f0;
   }
-  svg {
-    margin-right: 8px;
-    width: 20px;
-    height: 20px;
-  }
-`;
-
-export const OptionDisable = styled(Option)`
-  &:hover {
-    color: #888;
+  :last-child{
+    background: #f9f9f9;
   }
 `;
 

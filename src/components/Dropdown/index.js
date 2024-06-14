@@ -52,12 +52,14 @@ const Dropdown = ({ isOpen, toggleDropdown, handleOptionClick }) => {
 
   return (
     <Container>
-      <NameStyled onClick={handleIconClick}>{isClient ? name : "Cargando"}</NameStyled>
+      <NameStyled onClick={handleIconClick}>
+        {isClient ? name : "Cargando"}
+      </NameStyled>
       {isOpen && (
         <DropdownContainer ref={dropdownRef} isOpen={isOpen}>
-          <Option className="option" onClick={handleSignOut}>
-            Cerrar Sesión
-          </Option>
+          <Option>Publicaciones</Option>
+          <Option>Mi cuenta</Option>
+          <Option onClick={handleSignOut}>Cerrar Sesión</Option>
         </DropdownContainer>
       )}
     </Container>
