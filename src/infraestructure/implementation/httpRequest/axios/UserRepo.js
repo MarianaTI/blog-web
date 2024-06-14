@@ -1,9 +1,11 @@
 import IUserRepo from "@/domain/repositories/IUserRepo";
 import axios from "axios";
+import { setUser } from "../../../../actions/userActions";
 
 class UserRepo extends IUserRepo {
-  constructor(id_user) {
+  constructor(dispatch, id_user) {
     super();
+    this.dispatch = dispatch;
     this.id_user = id_user;
     this.urlSignIn = "http://localhost:3000/api/signin";
     this.urlSignUp = "http://localhost:3000/api/signup";
@@ -16,6 +18,7 @@ class UserRepo extends IUserRepo {
           "Content-Type": "application/json",
         },
       });
+      this.dispatch(setUser(response.data));
       return response.data;
     } catch (error) {
       console.error("Error signing in:", error.message);

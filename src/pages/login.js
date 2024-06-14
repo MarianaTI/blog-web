@@ -20,6 +20,8 @@ import { IoEyeSharp, IoEyeOffSharp } from "react-icons/io5";
 import { toast } from "react-toastify";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useDispatch } from "react-redux";
+import { setUser } from "../actions/userActions";
 
 const schema = yup.object().shape({
   email: yup
@@ -34,6 +36,7 @@ const schema = yup.object().shape({
 
 export default function Login() {
   const route = useRouter();
+  const dispatch = useDispatch();
   const [isShowPassword, setShowPassword] = useState(false);
   const {
     control,
@@ -54,7 +57,7 @@ export default function Login() {
   const onSubmit = async (data) => {
     try {
       const user = new User(null, null, data.email, data.password);
-      const userRepo = new UserRepo();
+      const userRepo = new UserRepo(dispatch);
       const signInUseCase = new SignInUserUseCase(userRepo);
       const signInResponse = await signInUseCase.run(user);
 
@@ -64,6 +67,7 @@ export default function Login() {
           "cookie-encrypted"
         ).toString();
         Cookies.set("userToken", encryptedToken, { expires: 1 / 24 });
+        dispatch(setUser(signInResponse.user));
         toast.success("Inicio de sesión exitoso!");
         route.push("/blog");
       }
