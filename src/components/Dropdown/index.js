@@ -44,6 +44,14 @@ const Dropdown = ({ isOpen, toggleDropdown, handleOptionClick }) => {
     }
   };
 
+  const handleMyCrud = () => {
+    route.push("/crud");
+  };
+
+  const handleMyAccount = () => {
+    route.push("/account");
+  };
+
   useEffect(() => {
     setIsClient(true);
     const userLogged = JSON.parse(sessionStorage.getItem("userToken"));
@@ -57,8 +65,8 @@ const Dropdown = ({ isOpen, toggleDropdown, handleOptionClick }) => {
       </NameStyled>
       {isOpen && (
         <DropdownContainer ref={dropdownRef} isOpen={isOpen}>
-          <Option>Publicaciones</Option>
-          <Option>Mi cuenta</Option>
+          <Option onClick={handleMyCrud}>Publicaciones</Option>
+          <Option onClick={handleMyAccount}>Mi cuenta</Option>
           <Option onClick={handleSignOut}>Cerrar Sesión</Option>
         </DropdownContainer>
       )}
