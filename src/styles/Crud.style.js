@@ -17,10 +17,10 @@ export const Title = styled.h1`
 `;
 
 export const Subtitle = styled.span`
-    font-family: "Poppins", sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    color: var(--tertiary-inverse);
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--tertiary-inverse);
 `;
 
 export const Section = styled.section`
@@ -30,7 +30,16 @@ export const Section = styled.section`
   margin-top: 80px;
   margin-bottom: 10%;
   grid-gap: 80px;
-  @media(max-width: 1600px){
+  @media (max-width: 1600px) {
     grid-template-columns: repeat(4, 1fr);
+  }
+`;
+
+export const FormStyled = styled.form`
+  display: flex;
+  flex-direction: column;
+  div {
+    display: flex;
+    justify-content: end;
   }
 `;
