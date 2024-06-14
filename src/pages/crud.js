@@ -1,3 +1,4 @@
+import DeleteBlogUseCase from "@/application/usecases/blogUseCase/DeleteBlogUseCase";
 import GetAllBlogUseCase from "@/application/usecases/blogUseCase/GetAllBlogUseCase";
 import Button from "@/components/Button";
 import CardCrud from "@/components/CardCrud";
@@ -17,6 +18,7 @@ import {
 import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 export default function Crud() {
   const user = useSelector((state) => state.user.username);
@@ -41,6 +43,7 @@ export default function Crud() {
 
   const blogRepo = new BlogRepo();
   const getAllBlogUseCase = new GetAllBlogUseCase(blogRepo);
+  const deleteBlogUseCase = new DeleteBlogUseCase(blogRepo);
 
   const onSubmit = async (data) => {
     const file = fileInputRef.current.files[0];
@@ -53,12 +56,25 @@ export default function Crud() {
     try {
       const response = await blogRepo.create(blogData);
       console.log("Blog creado:", response);
+      toast.success("Blog creado correctamente");
       fetchBlogs();
       handleClose();
     } catch (error) {
       console.error("Error al crear el blog:", error);
+      toast.success("Error al crear el blog");
     }
   };
+
+  const handleDelete = async (_id) => {
+    try {
+      const response = await deleteBlogUseCase.run(_id, userId);
+      toast.success("Blog elimnado correctamente");
+      fetchBlogs();
+    } catch (error) {
+      console.error("Error al eliminar el blog:", error);
+      toast.error("Error al eliminar el blog");
+    }
+  }
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -101,6 +117,7 @@ export default function Crud() {
               title={blog.title}
               date={formatDate(blog.createdAt)}
               user={blog.user}
+              onDelete={() => handleDelete(blog._id)}
             />
           ))}
         </Section>

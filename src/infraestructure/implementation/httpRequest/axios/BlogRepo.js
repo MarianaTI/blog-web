@@ -8,6 +8,7 @@ class BlogRepo extends IBlogRepo {
     this.url = "http://localhost:3000/api/blogs";
     this.urlId = "http://localhost:3000/api/blogs/";
     this.urlPost = "http://localhost:3000/api/create/blog";
+    this.urlDelete = "http://localhost:3000/api/blog/delete/";
   }
 
   async getAll() {
@@ -50,6 +51,19 @@ class BlogRepo extends IBlogRepo {
       throw error;
     }
   }
+
+async delete(_id, userId) {
+  const response = await axios.delete(`${this.urlDelete}${_id}`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    data: {
+      userId: userId,
+    },
+  });
+  return response.data;
+}
+
 }
 
 export default BlogRepo;

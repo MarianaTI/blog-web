@@ -1,7 +1,7 @@
 import React from "react";
 import { ButtonContainer, CardStyled, Info, Top } from "./index.style";
 
-const CardCrud = ({ image, title, alt, date, user, onClick }) => {
+const CardCrud = ({ image, title, alt, date, user, onClick, onDelete }) => {
   return (
     <CardStyled onClick={onClick}>
       <Top>
@@ -18,10 +18,10 @@ const CardCrud = ({ image, title, alt, date, user, onClick }) => {
         <h5>{title}</h5>
       </Top>
       <ButtonContainer>
-        <button>
+        <button >
             Editar
         </button>
-        <button>
+        <button onClick={onDelete} type="submit">
             Eliminar
         </button>
       </ButtonContainer>
