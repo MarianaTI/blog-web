@@ -6,7 +6,7 @@ const Card = ({ image, title, alt, date, user, onClick }) => {
   return (
     <CardStyled onClick={onClick}>
       <Top>
-        <Image
+        <img
           src={image}
           width={220}
           height={180}
