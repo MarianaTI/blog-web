@@ -1,7 +1,7 @@
 import React from "react";
-import { CardStyled, Info, Top } from "./index.style";
+import { ButtonContainer, CardStyled, Info, Top } from "./index.style";
 
-const Card = ({ image, title, alt, date, user, onClick }) => {
+const CardCrud = ({ image, title, alt, date, user, onClick }) => {
   return (
     <CardStyled onClick={onClick}>
       <Top>
@@ -17,12 +17,16 @@ const Card = ({ image, title, alt, date, user, onClick }) => {
         />
         <h5>{title}</h5>
       </Top>
-      <Info>
-        <span>{date}</span>
-        <span>By {user}</span>
-      </Info>
+      <ButtonContainer>
+        <button>
+            Editar
+        </button>
+        <button>
+            Eliminar
+        </button>
+      </ButtonContainer>
     </CardStyled>
   );
 };
 
-export default Card;
+export default CardCrud;

@@ -1,10 +1,9 @@
 import GetAllBlogUseCase from "@/application/usecases/blogUseCase/GetAllBlogUseCase";
-import Card from "@/components/Card";
+import CardCrud from "@/components/CardCrud";
 import BlogRepo from "@/infraestructure/implementation/httpRequest/axios/BlogRepo";
 import {
   ButtonContainer,
   Container,
-  PostContainer,
   Section,
   Subtitle,
   Title,
@@ -33,7 +32,6 @@ export default function Crud() {
       const filteredBlogs = response.response.blogs.filter(
         (blog) => blog.user === user
       );
-      console.log(filteredBlogs);
       setBlogs(filteredBlogs);
     } catch (error) {
       console.log(error);
@@ -54,7 +52,7 @@ export default function Crud() {
         <Subtitle>Publicaciones</Subtitle>
         <Section>
           {blogs.map((blog, index) => (
-            <Card
+            <CardCrud
               key={index}
               image={blog.image.secureUrl}
               alt={blog.title}
