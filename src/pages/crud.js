@@ -21,6 +21,7 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useRouter } from "next/router";
 
 const schema = yup.object().shape({
   title: yup.string().required("El título es obligatorio"),
@@ -29,6 +30,7 @@ const schema = yup.object().shape({
 });
 
 export default function Crud() {
+  const router = useRouter();
   const user = useSelector((state) => state.user.username);
   const userId = useSelector((state) => state.user._id);
   const [blogs, setBlogs] = useState([]);
@@ -43,6 +45,13 @@ export default function Crud() {
   } = useForm({
     resolver: yupResolver(schema),
   });
+
+  const navigateToBlog = (id) => {
+    return router.push({
+      pathname: "/[blogId]",
+      query: { blogId: id },
+    });
+  };
 
   const handleOpen = () => {
     setOpen(true);
@@ -135,6 +144,7 @@ export default function Crud() {
                 date={formatDate(blog.createdAt)}
                 user={blog.user}
                 onDelete={() => handleDelete(blog._id)}
+                onClick={() => navigateToBlog(blog._id)}
               />
             ))}
           </Section>
