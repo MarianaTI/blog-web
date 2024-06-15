@@ -19,6 +19,14 @@ import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+const schema = yup.object().shape({
+  title: yup.string().required("El título es obligatorio"),
+  description: yup.string().required("La descripción es obligatoria"),
+  content: yup.string().required("El contenido es obligatorio"),
+});
 
 export default function Crud() {
   const user = useSelector((state) => state.user.username);
@@ -30,8 +38,11 @@ export default function Crud() {
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors, isDirty },
-  } = useForm({});
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
 
   const handleOpen = () => {
     setOpen(true);
@@ -39,6 +50,7 @@ export default function Crud() {
 
   const handleClose = () => {
     setOpen(false);
+    reset();
   };
 
   const blogRepo = new BlogRepo();
@@ -50,7 +62,7 @@ export default function Crud() {
     const blogData = {
       ...data,
       image: file,
-      id_user: userId
+      id_user: userId,
     };
 
     try {
@@ -74,7 +86,7 @@ export default function Crud() {
       console.error("Error al eliminar el blog:", error);
       toast.error("Error al eliminar el blog");
     }
-  }
+  };
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -129,12 +141,19 @@ export default function Crud() {
         message="Por favor, complete la información a continuación para agregar un nuevo blog."
       >
         <FormStyled onSubmit={handleSubmit(onSubmit)}>
-          <Input fullWidth control={control} name="title" label="Título" />
+          <Input
+            fullWidth
+            control={control}
+            name="title"
+            label="Título"
+            error={errors.title?.message}
+          />
           <Input
             fullWidth
             control={control}
             name="description"
             label="Descripción del blog"
+            error={errors.description?.message}
           />
           <Textarea
             placeholder="Escriba el contenido de su blog aquí..."
@@ -142,6 +161,7 @@ export default function Crud() {
             control={control}
             name="content"
             label="Contenido del blog"
+            error={errors.content?.message}
           />
           <File
             name="image"
@@ -151,7 +171,7 @@ export default function Crud() {
                 const reader = new FileReader();
                 reader.onloadend = function () {
                   console.log("Imagen en base64:", reader.result);
-                  setImageUrl(reader.result); 
+                  setImageUrl(reader.result);
                 };
                 reader.readAsDataURL(file);
               }
@@ -159,7 +179,7 @@ export default function Crud() {
             ref={fileInputRef}
           />
           <div>
-            <Button text="Aceptar" type="submit"/>
+            <Button text="Aceptar" type="submit" />
           </div>
         </FormStyled>
       </ModalComponent>
