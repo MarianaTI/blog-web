@@ -20,24 +20,11 @@ const Navbar = () => {
       <h1>Glowy</h1>
       <LinkStyled>
         <li>
-          <a href="/" className={router.pathname === "/" ? "active" : ""}>
-            Home
-          </a>
-        </li>
-        <li>
           <a
             href="/blog"
             className={router.pathname === "/blog" ? "active" : ""}
           >
             Blog
-          </a>
-        </li>
-        <li>
-          <a
-            href="/contact"
-            className={router.pathname === "/contact" ? "active" : ""}
-          >
-            Contact
           </a>
         </li>
       </LinkStyled>

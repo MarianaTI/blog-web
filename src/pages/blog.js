@@ -52,19 +52,25 @@ export default function Blog() {
           </span>
         </Content>
       </Header>
-      <Section>
-        {blogs.map((blog, index) => (
-          <Card
-            key={index}
-            image={blog.image.secureUrl}
-            alt={blog.title}
-            title={blog.title}
-            date={formatDate(blog.createdAt)}
-            user={blog.user}
-            onClick={() => navigateToBlog(blog._id)}
-          />
-        ))}
-      </Section>
+      {blogs.length === 0 ? (
+          <div style={{textAlign: "center"}}>
+            <span>No hay publicaciones disponibles</span>
+          </div>
+        ) : (
+          <Section>
+            {blogs.map((blog, index) => (
+              <Card
+                key={index}
+                image={blog.image.secureUrl}
+                alt={blog.title}
+                title={blog.title}
+                date={formatDate(blog.createdAt)}
+                user={blog.user}
+                onDelete={() => handleDelete(blog._id)}
+              />
+            ))}
+          </Section>
+        )}
     </div>
   );
 }

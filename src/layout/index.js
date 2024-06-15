@@ -6,7 +6,7 @@ import { ChildrenContainer, Footer, NavbarContainer } from "./index.style";
 export default function Layout({ children }) {
   const router = useRouter();
 
-  const noNavbar = !router.pathname.match(/login|register/g);
+  const noNavbar = !router.pathname.match(/(\/register|\/)$/);
   return (
     <div>
       <NavbarContainer noNavbar={noNavbar}>{noNavbar && <Navbar />}</NavbarContainer>

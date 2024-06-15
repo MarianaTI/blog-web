@@ -38,7 +38,7 @@ const Dropdown = ({ isOpen, toggleDropdown, handleOptionClick }) => {
   const handleSignOut = () => {
     try {
       Cookies.remove("userToken");
-      route.push("/login");
+      route.push("/");
     } catch (error) {
       console.error("Error signing out: ", error);
     }
@@ -65,8 +65,7 @@ const Dropdown = ({ isOpen, toggleDropdown, handleOptionClick }) => {
       </NameStyled>
       {isOpen && (
         <DropdownContainer ref={dropdownRef} isOpen={isOpen}>
-          <Option onClick={handleMyCrud}>Publicaciones</Option>
-          <Option onClick={handleMyAccount}>Mi cuenta</Option>
+          <Option onClick={handleMyCrud}>Mi cuenta</Option>
           <Option onClick={handleSignOut}>Cerrar Sesión</Option>
         </DropdownContainer>
       )}

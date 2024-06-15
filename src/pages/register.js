@@ -54,7 +54,7 @@ export default function Register() {
       const registeredUser = await signUpUserUseCase.run(user);
       console.log("Usuario creado: ", registeredUser);
       toast.success("Registro exitoso!");
-      route.push("/login");
+      route.push("/");
     } catch (error) {
       console.error("Error creando usuario:", error);
       toast.error("Error al registrarse :(");
@@ -101,7 +101,7 @@ export default function Register() {
           <div>
             <span>
               ¿Ya tienes cuenta?{" "}
-              <a href="/login" className="register">
+              <a href="/" className="register">
                 Inicia sesión
               </a>
             </span>
