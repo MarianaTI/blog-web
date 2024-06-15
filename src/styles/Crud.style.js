@@ -2,6 +2,9 @@ import styled from "@emotion/styled";
 
 export const Container = styled.div`
   margin: 16px 32px;
+  @media (max-width: 320px) {
+    margin: 0px;
+  }
 `;
 
 export const ButtonContainer = styled.div`
@@ -14,6 +17,10 @@ export const Title = styled.h1`
   font-size: 32px;
   font-weight: 700;
   color: var(--secondary-700);
+  @media (max-width: 320px) {
+    font-size: 24px;
+    text-align: center;
+  }
 `;
 
 export const Subtitle = styled.span`

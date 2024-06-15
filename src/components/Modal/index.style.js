@@ -13,7 +13,6 @@ export const ModalContent = styled.div`
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-
   & h1 {
     font-family: "Poppins", sans-serif;
     font-weight: 500;
@@ -28,6 +27,15 @@ export const ModalContent = styled.div`
   @media (max-width: 768px) {
     width: 400px;
     padding: 24px;
+  }
+  @media (max-width: 320px) {
+    width: 280px;
+    padding: 16px 24px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-height: 90%;
+    overflow-y: auto;
   }
 `;
 

@@ -8,6 +8,9 @@ export const NavbarContainer = styled.div`
 
 export const ChildrenContainer = styled.div`
   margin: ${(props) => (props.noNavbar ? "0 100px" : "0")};
+  @media (max-width: 320px) {
+    margin: ${(props) => (props.noNavbar ? "0 32px" : "0")};
+  }
 `;
 
 export const Footer = styled.div`

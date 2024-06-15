@@ -43,4 +43,8 @@ a {
   --secondary-inverse: #c7c7c7;
   --tertiary: #575757;
   --tertiary-inverse: #bebebe;
+  --desktop: 1600px;
+  --laptop: 1280px;
+  --tablet: 768px;
+  --mobile: 320px;
 }

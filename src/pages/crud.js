@@ -11,7 +11,6 @@ import {
   ButtonContainer,
   Container,
   FormStyled,
-  Section,
   Subtitle,
   Title,
 } from "@/styles/Crud.style";
@@ -23,6 +22,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useRouter } from "next/router";
 import UpdateBlogUseCase from "@/application/usecases/blogUseCase/UpdateBlogUseCase";
+import { Section } from "@/styles/Blog.style";
 
 const schema = yup.object().shape({
   title: yup.string().required("El título es obligatorio"),

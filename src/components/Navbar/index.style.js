@@ -11,11 +11,15 @@ export const NavbarStyled = styled.nav`
   justify-content: space-between;
   align-items: center;
   padding: 0 64px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 30px 0 rgba(0, 0, 0, 0.10);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 30px 0 rgba(0, 0, 0, 0.1);
   h1 {
     font-family: "Poppins", sans-serif;
     font-size: 22px;
     font-weight: 600;
+  }
+  @media (max-width: 320px) {
+    width: 90%;
+    padding: 16px;
   }
 `;
 
@@ -45,6 +49,9 @@ export const LinkStyled = styled.ul`
     &.active {
       font-weight: 600;
     }
+  }
+  @media (max-width: 320px) {
+    gap: 8px;
   }
 `;
 

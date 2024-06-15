@@ -23,6 +23,9 @@ export const Content = styled.div`
     font-weight: 500;
     color: var(--tertiary-inverse);
   }
+  @media (max-width: 320px) {
+    width: 250px;
+  }
 `;
 
 export const Section = styled.section`
@@ -33,5 +36,16 @@ export const Section = styled.section`
   grid-gap: 80px;
   @media(max-width: 1600px){
     grid-template-columns: repeat(4, 1fr);
+  }
+  @media(max-width: 1280px){
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media(max-width: 768px){
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 320px) {
+    justify-content: center;
+    margin-top: 32px;
+    grid-template-columns: 1fr;
   }
 `;

@@ -7,6 +7,9 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (max-width: 320px) {
+    background-color: var(--neutral);
+  }
 `;
 
 export const Content = styled.div`
@@ -19,6 +22,17 @@ export const Content = styled.div`
   justify-content: center;
   align-items: center;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 6px 50px 0 rgba(0, 0, 0, 0.05);
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    width: 430px;
+  }
+  @media (max-width: 320px) {
+    grid-template-columns: 1fr;
+    width: 100vw;
+    height: 100vh;
+    box-shadow: none;
+    border-radius: none;
+  }
 `;
 
 export const FormContainer = styled.div`
@@ -53,9 +67,12 @@ export const Form = styled.form`
 `;
 
 export const ImageContainer = styled.div`
-    padding: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+  padding: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `;
