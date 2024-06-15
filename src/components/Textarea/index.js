@@ -34,6 +34,7 @@ const Textarea = ({
         <TextareaStyled
           {...field}
           fullWidth={fullWidth}
+          name={name}
           type={type}
           placeholder={placeholder}
           commentDesign={commentDesign}

@@ -73,7 +73,7 @@ export default function Crud() {
       handleClose();
     } catch (error) {
       console.error("Error al crear el blog:", error);
-      toast.success("Error al crear el blog");
+      toast.error("Error al crear el blog");
     }
   };
 

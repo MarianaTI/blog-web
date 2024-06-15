@@ -1,8 +1,5 @@
 class ICommentRepo {
-    getAll() {
-      throw "not implemented";
-    }
-    create(blog) {
+    create(comment) {
       throw "not implemented";
     }
   }
