@@ -1,8 +1,24 @@
 import React from "react";
 import { useController } from "react-hook-form";
-import { ErrorMessage, IconWrapper, InputWrapper, Label, TextareaStyled } from "./index.style";
+import {
+  ErrorMessage,
+  IconWrapper,
+  InputWrapper,
+  Label,
+  TextareaStyled,
+} from "./index.style";
 
-const Textarea = ({ label, icon, error, control, name, fullWidth, type, placeholder }) => {
+const Textarea = ({
+  label,
+  icon,
+  error,
+  control,
+  name,
+  fullWidth,
+  type,
+  placeholder,
+  commentDesign
+}) => {
   const {
     field,
     fieldState: { invalid, isTouched, isDirty },
@@ -15,7 +31,13 @@ const Textarea = ({ label, icon, error, control, name, fullWidth, type, placehol
     <>
       <Label>{label}</Label>
       <InputWrapper>
-        <TextareaStyled {...field} fullWidth={fullWidth} type={type} placeholder={placeholder}/>
+        <TextareaStyled
+          {...field}
+          fullWidth={fullWidth}
+          type={type}
+          placeholder={placeholder}
+          commentDesign={commentDesign}
+        />
         {icon && <IconWrapper>{icon}</IconWrapper>}
       </InputWrapper>
       {error && <ErrorMessage>{error}</ErrorMessage>}

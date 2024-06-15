@@ -18,12 +18,20 @@ import Button from "@/components/Button";
 import Comment from "@/components/Comment";
 import BlogRepo from "@/infraestructure/implementation/httpRequest/axios/BlogRepo";
 import GetOneBlogUseCase from "@/application/usecases/blogUseCase/GetOneBlogUseCase";
+import { useForm } from "react-hook-form";
+import Textarea from "@/components/Textarea";
 
 export default function BlogSlug() {
   const router = useRouter();
   const { blogId } = router.query;
-  console.log(blogId);
   const [selectedBlog, setSelectedBlog] = useState(null);
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors, isDirty },
+  } = useForm({
+  });
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -33,6 +41,15 @@ export default function BlogSlug() {
     return `${day} ${month}, ${year}`;
   };
 
+  const formatHour = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleTimeString('en-US', {
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: true
+    });
+  };
+  
   const blogRepo = new BlogRepo();
   const getOneBlogUseCase = new GetOneBlogUseCase(blogRepo);
 
@@ -82,17 +99,24 @@ export default function BlogSlug() {
       <Comments>
         <h5>Comentarios</h5>
         <FormStyled>
-          <TextAreaStyled placeholder="Escribe algún comentario..." />
+        <Textarea
+            placeholder="Escriba aquí su comentario..."
+            fullWidth
+            control={control}
+            name="comment"
+            commentDesign
+            error={errors.content?.message}
+          />
           <Button text="Enviar" />
         </FormStyled>
         <CommentContainer>
-          {comments.map((comment, index) => (
+          {selectedBlog.comment.map((comment, index) => (
             <Comment
               key={index}
-              user={comment.user}
+              user={comment.id_user}
               comment={comment.comment}
-              date={comment.date}
-              hour={comment.hour}
+              date={formatDate(comment.createdAt)}
+              hour={formatHour(comment.createdAt)}
             />
           ))}
         </CommentContainer>

@@ -1,3 +1,4 @@
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
 export const Label = styled.p`
@@ -35,6 +36,30 @@ export const TextareaStyled = styled.textarea`
     padding: 12px;
     outline: none;
   }
+  ${(props) =>
+    props.commentDesign &&
+    css`
+      width: 100%;
+      height: 120px;
+      padding: 12px;
+      box-sizing: border-box;
+      border: 1px solid var(--secondary-inverse);
+      border-radius: 10px;
+      background: var(--neutral);
+      resize: none;
+      font-family: "Poppins", sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--default);
+      caret-color: var(--secondary-500);
+      :focus {
+        outline: none !important;
+      }
+      &:not(:focus) {
+        padding: 12px;
+        outline: none;
+      }
+    `}
 `;
 
 export const IconWrapper = styled.div`
