@@ -66,7 +66,7 @@ export default function Blog() {
                 title={blog.title}
                 date={formatDate(blog.createdAt)}
                 user={blog.user}
-                onDelete={() => handleDelete(blog._id)}
+                onClick={() => navigateToBlog(blog._id)}
               />
             ))}
           </Section>
