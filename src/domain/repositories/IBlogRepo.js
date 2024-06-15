@@ -8,6 +8,9 @@ class IBlogRepo {
   create(blog) {
     throw "not implemented";
   }
+  update(blog) {
+    throw "not implemented";
+  }
   delete(_id) {
     throw "not implemented";
   }

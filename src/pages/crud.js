@@ -22,6 +22,7 @@ import { toast } from "react-toastify";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useRouter } from "next/router";
+import UpdateBlogUseCase from "@/application/usecases/blogUseCase/UpdateBlogUseCase";
 
 const schema = yup.object().shape({
   title: yup.string().required("El título es obligatorio"),
@@ -29,12 +30,21 @@ const schema = yup.object().shape({
   content: yup.string().required("El contenido es obligatorio"),
 });
 
+const editSchema = yup.object().shape({
+  title: yup.string(),
+  description: yup.string(),
+  content: yup.string(),
+});
+
+
 export default function Crud() {
   const router = useRouter();
   const user = useSelector((state) => state.user.username);
   const userId = useSelector((state) => state.user._id);
   const [blogs, setBlogs] = useState([]);
   const [open, setOpen] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
+  const [selectedBlog, setSelectedBlog] = useState(null);
   const fileInputRef = useRef(null);
   const [imageUrl, setImageUrl] = useState("");
   const {
@@ -44,6 +54,10 @@ export default function Crud() {
     formState: { errors, isDirty },
   } = useForm({
     resolver: yupResolver(schema),
+  });
+
+  const editForm = useForm({
+    resolver: yupResolver(editSchema),
   });
 
   const navigateToBlog = (id) => {
@@ -59,6 +73,17 @@ export default function Crud() {
 
   const handleClose = () => {
     setOpen(false);
+    reset();
+  };
+
+  const handleOpenEdit = (blog) => {
+    setSelectedBlog(blog);
+    editForm.reset(blog);
+    setOpenEdit(true);
+  };
+
+  const handleCloseEdit = () => {
+    setOpenEdit(false);
     reset();
   };
 
@@ -85,6 +110,31 @@ export default function Crud() {
       toast.error("Error al crear el blog");
     }
   };
+
+  const onSubmitUpdate = async (data) => {
+    const file = fileInputRef.current.files[0];
+    const updatedBlog = {
+      _id: selectedBlog._id,
+      id_user: userId,
+      title: data.title,
+      description: data.description,
+      content: data.content,
+      image: file,
+    };
+    const blogRepo = new BlogRepo(userId);
+    const updateBlogUseCase = new UpdateBlogUseCase(blogRepo);
+
+    try {
+      const response = await updateBlogUseCase.run(updatedBlog);
+      console.log("Blog updated successfully: ", response);
+      toast.success("Blog editado correctamente");
+      fetchBlogs();
+      handleCloseEdit();
+    } catch (error) {
+      console.error("Error updating blog: ", error);
+      toast.error("Error al crear el blog");
+    }
+  }
 
   const handleDelete = async (_id) => {
     try {
@@ -130,7 +180,7 @@ export default function Crud() {
       <div>
         <Subtitle>Publicaciones</Subtitle>
         {blogs.length === 0 ? (
-          <div style={{textAlign: "center"}}>
+          <div style={{ textAlign: "center" }}>
             <span>No tienes publicaciones aún. ¡Agrega tu primer blog!</span>
           </div>
         ) : (
@@ -145,6 +195,7 @@ export default function Crud() {
                 user={blog.user}
                 onDelete={() => handleDelete(blog._id)}
                 onClick={() => navigateToBlog(blog._id)}
+                onUpdate={() => handleOpenEdit(blog)}
               />
             ))}
           </Section>
@@ -178,6 +229,58 @@ export default function Crud() {
             name="content"
             label="Contenido del blog"
             error={errors.content?.message}
+          />
+          <File
+            name="image"
+            onChange={(e) => {
+              const file = e.target.files[0];
+              if (file) {
+                const reader = new FileReader();
+                reader.onloadend = function () {
+                  console.log("Imagen en base64:", reader.result);
+                  setImageUrl(reader.result);
+                };
+                reader.readAsDataURL(file);
+              }
+            }}
+            ref={fileInputRef}
+          />
+          <div>
+            <Button text="Aceptar" type="submit" />
+          </div>
+        </FormStyled>
+      </ModalComponent>
+      <ModalComponent
+        open={openEdit}
+        onClose={handleCloseEdit}
+        title="Editar blog"
+        message="Por favor, complete la información a continuación para editar su blog."
+      >
+        <FormStyled onSubmit={editForm.handleSubmit(onSubmitUpdate)}>
+          <Input
+            fullWidth
+            control={editForm.control}
+            name="title"
+            label="Título"
+            defaultValue={selectedBlog?.title}
+            error={editForm.formState.errors.title?.message}
+          />
+          <Input
+            fullWidth
+            control={editForm.control}
+            name="description"
+            label="Descripción del blog"
+            defaultValue={selectedBlog?.description}
+            error={editForm.formState.errors.description?.message}
+          />
+          <Textarea
+            placeholder="Escriba el contenido de su blog aquí..."
+            fullWidth
+            control={editForm.control}
+            name="content"
+            label="Contenido del blog"
+            defaultValue={selectedBlog?.content}
+            error={editForm.formState.errors.content?.message}
           />
           <File
             name="image"

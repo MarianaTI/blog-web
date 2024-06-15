@@ -8,6 +8,7 @@ class BlogRepo extends IBlogRepo {
     this.url = "http://localhost:3000/api/blogs";
     this.urlId = "http://localhost:3000/api/blogs/";
     this.urlPost = "http://localhost:3000/api/create/blog";
+    this.urlPut = "http://localhost:3000/api/update/blog/";
     this.urlDelete = "http://localhost:3000/api/blog/delete/";
   }
 
@@ -52,18 +53,38 @@ class BlogRepo extends IBlogRepo {
     }
   }
 
-async delete(_id, userId) {
-  const response = await axios.delete(`${this.urlDelete}${_id}`, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-    data: {
-      userId: userId,
-    },
-  });
-  return response.data;
-}
+  async update(blog) {
+    try {
+      const formData = new FormData();
+      formData.append("id_user", blog.id_user);
+      formData.append("title", blog.title);
+      formData.append("description", blog.description);
+      formData.append("content", blog.content);
+      formData.append("image", blog.image);
+      const response = await axios.put(`${this.urlPut}${blog._id}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          id_user: this.id_user,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error("Error al actualizar el blog:", error);
+      throw error;
+    }
+  }
 
+  async delete(_id, userId) {
+    const response = await axios.delete(`${this.urlDelete}${_id}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: {
+        userId: userId,
+      },
+    });
+    return response.data;
+  }
 }
 
 export default BlogRepo;

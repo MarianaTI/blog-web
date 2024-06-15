@@ -17,7 +17,8 @@ const Textarea = ({
   fullWidth,
   type,
   placeholder,
-  commentDesign
+  commentDesign,
+  defaultValue
 }) => {
   const {
     field,
@@ -35,6 +36,7 @@ const Textarea = ({
           {...field}
           fullWidth={fullWidth}
           name={name}
+          defaultValue={defaultValue}
           type={type}
           placeholder={placeholder}
           commentDesign={commentDesign}
